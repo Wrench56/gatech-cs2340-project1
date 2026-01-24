@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.core.handlers.wsgi import WSGIHandler
 from django.contrib.auth import get_user_model
 
-import auth.forms as forms
+import cauth.forms as forms
 
 def register(request: WSGIHandler):
     err_dict = {'action': 'register'}
