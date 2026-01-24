@@ -23,6 +23,7 @@ rules:
       - readme
       - license
       - tools
+      - core
       - auth
       - movies
       - cart
