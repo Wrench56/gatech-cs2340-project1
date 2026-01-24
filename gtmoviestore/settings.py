@@ -60,7 +60,7 @@ ROOT_URLCONF = 'gtmoviestore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['cauth/templates', 'cart/templates', 'movies/templates', BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
