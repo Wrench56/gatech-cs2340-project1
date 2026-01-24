@@ -24,7 +24,7 @@ rules:
       - license
       - tools
       - auth
-      - store
+      - movies
       - cart
       - reviews
       - orders
