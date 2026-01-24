@@ -1,0 +1,15 @@
+<h1>Movies</h1>
+
+<ul>
+    {% for m in movies %}   
+        <li>
+            <h2>{{ m.title }} ({{ m.date_released.year }})</h2>
+            <p>By {{ m.director }}</p>
+            <div class='actor-section'>
+                {% for a in m.actors.all %}
+                    <p>{{ a.name }}</p>
+                {% endfor %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
