@@ -1,5 +1,7 @@
 from django.db import models
  
+import uuid
+
 class Person(models.Model):
     name = models.CharField(max_length=255)
 
@@ -20,6 +22,8 @@ class Movie(models.Model):
     genre = models.CharField(choices=MOVIE_GENRE)
     director = models.ForeignKey(Person, models.CASCADE, related_name='director')
     actors = models.ManyToManyField(Person, related_name='actor')
+    price = models.FloatField()
+    mid = models.UUIDField(primary_key=True, auto_created=True, default=uuid.uuid4, editable=False)
 
     def __str__(self) -> str:
         return f'{self.title} ({self.date_released.year}) by {self.director}'
