@@ -1,0 +1,9 @@
+<h1>Your Cart</h1>
+<a href="/cart/remove/?all=true">Remove all</a>
+{% for e in items %}
+    <div class="cart-item">
+        <p>{{ e.movie.title }} ({{ e.movie.date_released.year }}) - ${{ e.movie.price }}</p>
+
+        <a href="/cart/remove/?cid={{ e.cid }}">Remove</a>
+    </div>
+{% endfor %}
