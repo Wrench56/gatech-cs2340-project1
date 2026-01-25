@@ -1,5 +1,9 @@
+{% extends "base.html" %}
 {% load extras %}
 
+{% block title %}Movies{% endblock %}
+
+{% block content %}
 <h1>Movies</h1>
 
 <form action="" method="post">
@@ -43,3 +47,4 @@
         </li>
     {% endfor %}
 </ul>
+{% endblock %}

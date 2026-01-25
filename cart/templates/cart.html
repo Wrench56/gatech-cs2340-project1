@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
 <h1>Your Cart</h1>
 <a href="/cart/remove/?all=true">Remove all</a>
 {% for e in items %}
@@ -9,3 +14,4 @@
 {% endfor %}
 
 <a href="/orders/add/">Checkout</a>
+{% endblock %}

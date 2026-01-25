@@ -1,5 +1,9 @@
+{% extends "base.html" %}
 {% load extras %}
 
+{% block title %}Orders{% endblock %}
+
+{% block content %}
 <h1>Orders</h1>
 
 {% for o in orders %}
@@ -12,3 +16,4 @@
         </div>
     {% endfor %}
 {% endfor %}
+{% endblock %}

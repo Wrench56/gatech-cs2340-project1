@@ -1,3 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Orders{% endblock %}
+
+{% block content %}
 <h1>Add your review for {{ movie.title }} ({{ movie.date_released.year }})</h1>
 
 <form action="" method="post">
@@ -5,3 +10,4 @@
     {{ form }}
     <input type="submit" value="Submit">
 </form>
+{% endblock %}
