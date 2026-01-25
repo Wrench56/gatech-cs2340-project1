@@ -5,11 +5,14 @@
         <li>
             <h2>{{ m.title }} ({{ m.date_released.year }})</h2>
             <p>By {{ m.director }}</p>
-            <div class='actor-section'>
+            <div class="actor-section">
                 {% for a in m.actors.all %}
                     <p>{{ a.name }}</p>
                 {% endfor %}
             </div>
+            {% if is_logged_in %}
+            <a href="/cart/add/?mid={{ m.mid }}">Add to cart</a>
+            {% endif %}
         </li>
     {% endfor %}
 </ul>

@@ -33,6 +33,6 @@ def cart_add(request):
     mid = request.GET.get('mid')
     if mid == None:
         return HttpResponseBadRequest()
-    movie = Movie.objects.filter(mid=mid)
+    movie = Movie.objects.filter(mid=mid).first()
     CartItem.objects.create(user=request.user, movie=movie)
     return HttpResponseRedirect('/cart/')
