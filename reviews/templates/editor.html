@@ -1,0 +1,7 @@
+<h1>Add your review for {{ movie.title }} ({{ movie.date_released.year }})</h1>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>

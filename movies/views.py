@@ -1,8 +1,12 @@
 from django.shortcuts import render
 
+from reviews.models import Review
 from .models import Movie
 
 def movies(request):
     movies = Movie.objects.all().order_by('title')
-    print(request.user)
-    return render(request, 'movies.html', {'movies': movies, 'is_logged_in': (request.user != 'AnonymousUser')})
+    reviews = []
+    for movie in movies:
+        reviews.append(Review.objects.filter(movie=movie))
+    print(request.user.is_authenticated)
+    return render(request, 'movies.html', {'movies': movies, 'reviews': reviews, 'user': request.user})

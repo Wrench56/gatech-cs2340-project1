@@ -42,7 +42,8 @@ INSTALLED_APPS = [
 
     'cauth',
     'cart',
-    'movies'
+    'movies',
+    'reviews',
 ]
 
 MIDDLEWARE = [

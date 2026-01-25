@@ -1,3 +1,5 @@
+{% load extras %}
+
 <h1>Movies</h1>
 
 <ul>
@@ -10,9 +12,19 @@
                     <p>{{ a.name }}</p>
                 {% endfor %}
             </div>
-            {% if is_logged_in %}
-            <a href="/cart/add/?mid={{ m.mid }}">Add to cart</a>
+            {% if user.is_authenticated %}
+                <a href="/reviews/add?mid={{ m.mid }}">Add review</a>
+                <a href="/cart/add/?mid={{ m.mid }}">Add to cart</a>
             {% endif %}
+            {% for r in reviews|index:forloop.counter0 %}
+                <h3>{{ r.title }}</h3>
+                {% if user == r.user %}
+                    <a href="/reviews/edit?rid={{ r.rid }}">Edit review</a>
+                    <a href="/reviews/delete?rid={{ r.rid }}">Delete review</a>
+                {% endif %}
+                <p>By {{ r.user.username }} on {{ r.date_created }}</p>
+                <p>{{ r.comment }}</p>
+            {% endfor %}
         </li>
     {% endfor %}
 </ul>
