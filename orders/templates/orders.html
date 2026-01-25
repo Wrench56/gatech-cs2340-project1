@@ -1,0 +1,14 @@
+{% load extras %}
+
+<h1>Orders</h1>
+
+{% for o in orders %}
+<h2>Order on {{ o.date_bought }} - {{ o.time_bought }}</h2>
+    <p>Status {{ o.status }}</p>
+    {% for oi in order_items|index:forloop.counter0 %}
+        <div class="cart-item">
+            <p>{{ oi.movie.title }}</p>
+            <p>Added at: {{ oi.added_at }}</p>
+        </div>
+    {% endfor %}
+{% endfor %}
