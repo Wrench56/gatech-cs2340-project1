@@ -7,10 +7,15 @@
         <li>
             <h2>{{ m.title }} ({{ m.date_released.year }})</h2>
             <p>By {{ m.director }}</p>
+            <img src="{{ m.image.url }}" alt="{{ m.title }}">
             <div class="actor-section">
                 {% for a in m.actors.all %}
                     <p>{{ a.name }}</p>
+                    <img src="{{ a.image.url }}" alt="{{ a.name }}">
                 {% endfor %}
+            </div>
+            <div class="description">
+                <p>{{ m.summary }}</p>
             </div>
             {% if user.is_authenticated %}
                 <a href="/reviews/add?mid={{ m.mid }}">Add review</a>

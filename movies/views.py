@@ -8,5 +8,4 @@ def movies(request):
     reviews = []
     for movie in movies:
         reviews.append(Review.objects.filter(movie=movie))
-    print(request.user.is_authenticated)
     return render(request, 'movies.html', {'movies': movies, 'reviews': reviews, 'user': request.user})
