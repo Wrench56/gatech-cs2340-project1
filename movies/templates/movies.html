@@ -28,13 +28,17 @@
                 <a href="/cart/add/?mid={{ m.mid }}">Add to cart</a>
             {% endif %}
             {% for r in reviews|index:forloop.counter0 %}
-                <h3>{{ r.title }}</h3>
-                {% if user == r.user %}
-                    <a href="/reviews/edit?rid={{ r.rid }}">Edit review</a>
-                    <a href="/reviews/delete?rid={{ r.rid }}">Delete review</a>
+                {% if r.is_visible %}
+                    <h3>{{ r.title }}</h3>
+                    {% if user == r.user %}
+                        <a href="/reviews/edit?rid={{ r.rid }}">Edit review</a>
+                        <a href="/reviews/delete?rid={{ r.rid }}">Delete review</a>
+                    {% else %}
+                        <a href="/reviews/report?rid={{ r.rid }}">Report review</a>
+                    {% endif %}
+                    <p>By {{ r.user.username }} on {{ r.date_created }}</p>
+                    <p>{{ r.comment }}</p>
                 {% endif %}
-                <p>By {{ r.user.username }} on {{ r.date_created }}</p>
-                <p>{{ r.comment }}</p>
             {% endfor %}
         </li>
     {% endfor %}

@@ -49,6 +49,8 @@ def review_edit(request):
         if not form.is_valid():
             return render(request, 'error.html', err_dict | {'error': 'Form is invalid'})
         review = Review.objects.filter(rid=form['rid'].value()).first()
+        if review.user != request.user:
+            return render(request, 'error.html', err_dict | {'error': 'Non-owner user tried to edit a review'})
         review.rating = form['rating'].value()
         review.title = form['title'].value()
         review.comment = form['comment'].value()
@@ -61,6 +63,24 @@ def review_delete(request):
         rid = request.GET.get('rid') 
         if rid is None:
             return render(request, 'error.html', err_dict | {'error': 'No review id provided'})
-        review = Review.objects.filter(rid=rid).first().delete()
+        review = Review.objects.filter(rid=rid).first()
+        if review.user != request.user:
+            return render(request, 'error.html', err_dict | {'error': 'Non-owner user tried to delete a review'})
+        review.delete()
+
+    return HttpResponseRedirect('/movies/')
+
+
+def review_report(request):
+    err_dict = {'action': 'review (edit)'}
+    if request.method == 'GET':
+        rid = request.GET.get('rid') 
+        if rid is None:
+            return render(request, 'error.html', err_dict | {'error': 'No review id provided'})
+        review = Review.objects.filter(rid=rid).first()
+        if review.user == request.user:
+            return render(request, 'error.html', err_dict | {'error': 'Owner user tried to report their review'})
+        review.is_visible = False
+        review.save()
 
     return HttpResponseRedirect('/movies/')
