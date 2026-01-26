@@ -3,15 +3,28 @@
 {% block title %}Your Cart{% endblock %}
 
 {% block content %}
-<h1>Your Cart</h1>
-<a href="/cart/remove/?all=true">Remove all</a>
-{% for e in items %}
-    <div class="cart-item">
-        <p>{{ e.movie.title }} ({{ e.movie.date_released.year }}) - ${{ e.movie.price }}</p>
+<div class="text-center m-3">
+    <h1>Your Cart</h1>
+</div>
+<div class="text-center">
+    <a class="btn btn-primary m-3" href="/cart/remove/?all=true">Remove all</a>
+    <a class="btn btn-primary m-3" href="/orders/add/">Checkout</a>
+</div>
 
-        <a href="/cart/remove/?cid={{ e.cid }}">Remove</a>
-    </div>
-{% endfor %}
-
-<a href="/orders/add/">Checkout</a>
+<div class=container>
+    {% for e in items %}
+        <div class="row text-center m-3 align-items-center bg-dark rounded p-2">
+            <div class="col-md-1 text-center">{{ forloop.counter }}. </div>
+            <div class="col-md-6 text-center">
+                {{ e.movie.title }} ({{ e.movie.date_released.year }}) 
+            </div>
+            <div class="col-md-1 text-center">
+                ${{ e.movie.price }}
+            </div>
+            <div class="col-md-4 text-center">
+                <a class="btn btn-primary m-3" href="/cart/remove/?cid={{ e.cid }}">Remove</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

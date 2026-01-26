@@ -4,16 +4,44 @@
 {% block title %}Orders{% endblock %}
 
 {% block content %}
-<h1>Orders</h1>
+<div class="text-center m-3">
+    <h1>Your Orders</h1>
+</div>
 
-{% for o in orders %}
-<h2>Order on {{ o.date_bought }} - {{ o.time_bought }}</h2>
-    <p>Status {{ o.status }}</p>
-    {% for oi in order_items|index:forloop.counter0 %}
-        <div class="cart-item">
-            <p>{{ oi.movie.title }}</p>
-            <p>Added at: {{ oi.added_at }}</p>
+<div class="container text-middle">
+    {% for o in orders %}
+        <div class="container rounded p-3 m-3 bg-secondary">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="m-3">Order on {{ o.date_bought }} - {{ o.time_bought }}</h4>
+                </div>
+                <div class="col-md-4 text-end">
+                    {% if o.status == 'PAID' %}
+                        <h3 class="m-3 badge bg-info">Status {{ o.status }}</h3>
+                    {% elif o.status == 'UNPAID' %}
+                        <h3 class="m-3 badge bg-error">Status {{ o.status }}</h3>
+                    {% elif o.status == 'SHIPPED' %}
+                        <h3 class="m-3 badge bg-success">Status {{ o.status }}</h3>
+                    {% else %}
+                        <h3 class="m-3 badge bg-secondary">Status {{ o.status }}</h3>
+                    {% endif %}
+                </div>
+            </div>
+            {% for oi in order_items|index:forloop.counter0 %}
+                <div class="row text-center m-3 align-items-center bg-dark rounded p-2">
+                    <div class="col-md-1 text-center">{{ forloop.counter }}. </div>
+                    <div class="col-md-6 text-center">
+                        {{ oi.movie.title }} ({{ oi.movie.date_released.year }}) 
+                    </div>
+                    <div class="col-md-1 text-center">
+                        ${{ oi.movie.price }}
+                    </div>
+                    <div class="col-md-4 text-center">
+                        Added at: {{ oi.added_at }}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     {% endfor %}
-{% endfor %}
+</div>
 {% endblock %}
