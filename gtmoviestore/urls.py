@@ -19,6 +19,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+from django.shortcuts import render
+
+def homepage(request):
+    return render(request, 'homepage.html', {})
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cauth/', include('cauth.urls')),
@@ -26,6 +31,7 @@ urlpatterns = [
     path('movies/', include('movies.urls')),
     path('reviews/', include('reviews.urls')),
     path('orders/', include('orders.urls')),
+    path('', homepage)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
