@@ -9,7 +9,19 @@
         <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
     </head>
     <body>
+        {% block navbar %}
+        {% endblock %}
         {% block content %}
         {% endblock %}
+        <footer class="row bg-secondary p-3 fixed-bottom">
+            <div class="col-sm-2">
+                © 2026 GT Movie Store
+            </div>
+            <div class="col-sm-8">
+            </div>
+            <div class="col-sm-2 text-center">
+                All rights reserved to Mark Devenyi.
+            </div>
+        </footer>
     </body>
 </html>

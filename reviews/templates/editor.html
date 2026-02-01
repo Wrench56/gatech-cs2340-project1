@@ -2,6 +2,10 @@
 
 {% block title %}Review Editor{% endblock %}
 
+{% block navbar %}
+    {% include "userbar.html" %}
+{% endblock %}
+
 {% block content %}
 <h1>Add your review for {{ movie.title }} ({{ movie.date_released.year }})</h1>
 
