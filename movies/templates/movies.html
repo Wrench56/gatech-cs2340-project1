@@ -37,22 +37,22 @@
                 <p class="text-center">By {{ m.director }}</p>
                 <div class="container-fluid text-center">
                     {% if m.image %}
-                        <img class="rounded img-fluid" src="{{ m.image.url }}" alt="{{ m.title }}">
+                        <img class="rounded img-fluid" style="width:100%;height:1920px;object-fit:cover;" src="{{ m.image.url }}" alt="{{ m.title }}">
                     {% else %}
-                        <img class="card-img-top rounded" src="/static/images/default-movie.png" alt="{{ m.title }}">
+                        <img class="rounded img-fluid" style="width:100%;height:1920px;object-fit:cover;" src="/static/images/default-movie.png" alt="{{ m.title }}">
                     {% endif %}
                 </div>
                 <div class="container-fluid p-3">
                     {{ m.summary }}
                 </div>
-                <div id="actors-movie-{{ m.title }}-{{ m.date_released.year }}" class="collapse">
+                <div id="actors-movie-{{ m.mid }}" class="collapse">
                     <div class="row">
                         {% for a in m.actors.all %}
                             <div class="card col-sm m-2 p-2 bg-secondary" style="width: 400px">
                                 {% if a.image %}
-                                    <img class="card-img-top rounded" src="{{ a.image.url }}" alt="{{ a.name }}">
+                                    <img class="card-img-top rounded img-fluid" style="width:100%;height:480px;object-fit:cover;" src="{{ a.image.url }}" alt="{{ a.name }}">
                                 {% else %}
-                                    <img class="card-img-top rounded" src="/static/images/default-person.png" alt="{{ a.name }}">
+                                    <img class="card-img-top rounded img-fluid" style="width:100%;height:480px;object-fit:cover;" src="/static/images/default-person.png" alt="{{ a.name }}">
                                 {% endif %}
                                 <div class="card-body">
                                     <div class="card-title text-center">{{ a.name }}</div>
@@ -62,14 +62,14 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary p-2 mt-3 m-2" data-bs-toggle="collapse" data-bs-target="#actors-movie-{{ m.title }}-{{ m.date_released.year }}">Show Actors</button>
+                    <button class="btn btn-primary p-2 mt-3 m-2" data-bs-toggle="collapse" data-bs-target="#actors-movie-{{ m.mid }}">Show Actors</button>
                     {% if user.is_authenticated %}
                         <a class="btn btn-primary p-2 mt-3 m-2" href="/cart/add/?mid={{ m.mid }}">Add to cart</a>
                         <a class="btn btn-primary p-2 mt-3 m-2" href="/reviews/add?mid={{ m.mid }}">Add review</a>
                     {% endif %}
-                    <button class="btn btn-primary p-2 mt-3 m-2" data-bs-toggle="collapse" data-bs-target="#reviews-movie-{{ m.title }}-{{ m.date_released.year }}">Hide Reviews</button>
+                    <button class="btn btn-primary p-2 mt-3 m-2" data-bs-toggle="collapse" data-bs-target="#reviews-movie-{{ m.mid }}">Hide Reviews</button>
                 </div>
-                <div id="reviews-movie-{{ m.title }}-{{ m.date_released.year }}" class="container rounded p-3 pt-4 mt-5 collapse bg-secondary show">
+                <div id="reviews-movie-{{ m.mid }}" class="container rounded p-3 pt-4 mt-5 collapse bg-secondary show">
                     <h3>Reviews</h3>
                     {% for r in reviews|index:forloop.counter0 %}
                         {% if r.is_visible %}
