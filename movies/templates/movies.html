@@ -15,27 +15,32 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <h1 class="text-center mt-3">Movies</h1>
 
-<form action="" method="post">
-    {% csrf_token %}
-    <div class="row">
-        <div class="m-3 mt-1 mb-1 col-auto">
-            {{ form }}
-        </div>
-        <div class="m-1 col">
-            <input type="submit" value="Submit">
-        </div>
-</form>
-
-
-
 <div class="d-flex flex-column min-vh-100 min-vw-100">
     <div class="container d-flex flex-column align-items-center justify-content-center flex-grow-1">
+        <div class="bg-dark rounded m-4 p-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="m-3 mt-1 mb-1 col-auto">
+                        {{ form.search }}
+                    </div>
+                    <div class="m-1 col">
+                        <input type="submit" value="Submit">
+                    </div>
+                </div>
+            </form>
+        </div>
+
         {% for m in movies %}
             <div class="container m-3 p-3 rounded bg-dark">
                 <h2 class="text-center">{{ m.title }} ({{ m.date_released.year }})</h2>
                 <p class="text-center">By {{ m.director }}</p>
                 <div class="container-fluid text-center">
-                    <img class="rounded img-fluid" src="{{ m.image.url }}" alt="{{ m.title }}">
+                    {% if m.image %}
+                        <img class="rounded img-fluid" src="{{ m.image.url }}" alt="{{ m.title }}">
+                    {% else %}
+                        <img class="card-img-top rounded" src="/static/images/default-movie.png" alt="{{ m.title }}">
+                    {% endif %}
                 </div>
                 <div class="container-fluid p-3">
                     {{ m.summary }}
@@ -44,7 +49,11 @@
                     <div class="row">
                         {% for a in m.actors.all %}
                             <div class="card col-sm m-2 p-2 bg-secondary" style="width: 400px">
-                                <img class="card-img-top rounded" src="{{ a.image.url }}" alt="{{ a.name }}">
+                                {% if a.image %}
+                                    <img class="card-img-top rounded" src="{{ a.image.url }}" alt="{{ a.name }}">
+                                {% else %}
+                                    <img class="card-img-top rounded" src="/static/images/default-person.png" alt="{{ a.name }}">
+                                {% endif %}
                                 <div class="card-body">
                                     <div class="card-title text-center">{{ a.name }}</div>
                                 </div>
